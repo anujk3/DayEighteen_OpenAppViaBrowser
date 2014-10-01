@@ -42,4 +42,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if (!url) {  return NO; }
+    
+    UIAlertView *alertView;
+    alertView = [[UIAlertView alloc] initWithTitle:@"Launch by URL" message:@"This app was launched from a URL" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    
+    NSString *myurl = [url absoluteString];
+    [[NSUserDefaults standardUserDefaults] setObject:myurl forKey:@"url"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    return YES;
+}
+
+
 @end
